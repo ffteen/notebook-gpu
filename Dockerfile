@@ -188,6 +188,9 @@ EXPOSE 8888
 ENTRYPOINT ["tini", "-g", "--"]
 CMD ["start-notebook.sh"]
 
+# Fix permissions on /etc/jupyter as root
+USER root
+
 # Add local files as late as possible to avoid cache busting
 COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
@@ -198,8 +201,7 @@ RUN chmod 755 /usr/local/bin/start.sh
 RUN chmod 755 /usr/local/bin/start-notebook.sh
 RUN chmod 755 /usr/local/bin/start-singleuser.sh
 
-# Fix permissions on /etc/jupyter as root
-USER root
+
 RUN fix-permissions /etc/jupyter/
 
 # Install all OS dependencies for fully functional notebook server
