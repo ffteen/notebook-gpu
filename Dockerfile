@@ -36,7 +36,8 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cuda-command-line-tools-${CUDA/./-} \
-        cuda-cublas-${CUDA/./-} \
+        libcublas10 \
+        libcublas-dev \
         cuda-cufft-${CUDA/./-} \
         cuda-curand-${CUDA/./-} \
         cuda-cusolver-${CUDA/./-} \
